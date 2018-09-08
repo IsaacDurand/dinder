@@ -29,7 +29,8 @@ class Unit
 end
 
 class Item
-  attr_reader :quantity, :unit, :product
+  attr_accessor :quantity
+  attr_reader :unit, :product
 
   def initialize(quantity, unit, product)
     @quantity = quantity
@@ -40,6 +41,8 @@ class Item
   def to_s
     "#{product} (#{quantity} #{unit})"
   end
+
+  # TODO: Add clone method (What does the existing clone method do?)
 end
 
 class ShoppingList
@@ -51,6 +54,22 @@ class ShoppingList
 
   def to_s
     items.join("\n")
+  end
+
+  def +(other_list)
+    # Cloning ensures that changing one list will not change any other lists
+    combined_items = items.map(&:clone)
+    other_list.items.each do |other_item|
+      match = false
+      combined_items.each do |item|
+        if item.product == other_item.product && item.unit == other_item.unit
+          item.quantity += other_item.quantity
+          match = true
+        end
+      end
+      combined_items << other_item.clone unless match
+    end
+    self.class.new(combined_items)
   end
 end
 
@@ -92,8 +111,13 @@ item_2 = Item.new(8, fluid_ounce, iced_tea)
 shopping_list = ShoppingList.new([item_1, item_2])
 lemony_iced_tea = Dish.new("lemony iced tea", "TBD", 1, shopping_list)
 
-lemony_iced_tea.print_shopping_list(2)
+# lemony_iced_tea.print_shopping_list(2)
 
-# I can now scale the shopping list for one dish
-# Next step: combine multiple dishes into one shopping list
-# Perhaps all I need is an operation for concatenating shopping lists?
+# TODO: Use more interesting lists
+l0 = ShoppingList.new([item_1, item_2])
+l1 = ShoppingList.new([item_1, item_2])
+l2 = l0 + l1
+[l0, l1, l2].each_with_index do |list, i|
+  puts "l#{i}"
+  puts list
+end
