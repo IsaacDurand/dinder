@@ -5,32 +5,36 @@
 # ruby <path>
 
 class Product
+  attr_reader :name
+
   def initialize(name)
     @name = name
   end
 
   def to_s
-    @name
+    name
   end
 end
 
 class Unit
+  attr_reader :name
+
   def initialize(name)
     @name = name
   end
 
   def to_s
-    @name
+    name
   end
 end
 
 class Item
-  attr_accessor :quantity, :unit, :product
+  attr_reader :quantity, :unit, :product
 
   def initialize(quantity, unit, product)
-    self.quantity = quantity
-    self.unit = unit
-    self.product = product
+    @quantity = quantity
+    @unit = unit
+    @product = product
   end
 
   def to_s
@@ -39,10 +43,10 @@ class Item
 end
 
 class ShoppingList
-  attr_accessor :items
+  attr_reader :items
 
   def initialize(items)
-    self.items = items
+    @items = items
   end
 
   def to_s
@@ -51,26 +55,27 @@ class ShoppingList
 end
 
 class Dish
+  attr_reader :name, :recipe, :base_servings, :base_shopping_list
   def initialize(name, recipe, servings, shopping_list)
     @name = name
     @recipe = recipe
-    @servings = servings
+    @base_servings = servings
     @base_shopping_list = shopping_list
   end
 
   def to_s
-    "#{@name} (serves #{@servings})"
+    "#{name} (serves #{base_servings})"
   end
 
-  def shopping_list(servings=@servings)
-    ratio = servings.fdiv(@servings)
-    @base_shopping_list.items.map do |item|
+  def shopping_list(servings=base_servings)
+    ratio = servings.fdiv(base_servings)
+    base_shopping_list.items.map do |item|
       Item.new(item.quantity * ratio, item.unit, item.product)
     end
   end
 
-  def print_shopping_list(servings=@servings)
-    puts "Shopping list for #{@name} (#{@servings} servings)"
+  def print_shopping_list(servings=base_servings)
+    puts "Shopping list for #{name} (#{servings} servings)"
     puts shopping_list(servings)
   end
 end
