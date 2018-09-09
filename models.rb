@@ -32,8 +32,7 @@ class Item
   PRODUCT_MISMATCH = "Cannot add two items belonging to different products"
   UNIT_MISMATCH = "Cannot add two items with quantities specified in different units"
 
-  attr_accessor :quantity
-  attr_reader :unit, :product
+  attr_reader :unit, :product, :quantity
 
   def initialize(quantity, unit, product)
     @quantity = quantity
@@ -64,14 +63,15 @@ class ShoppingList
     items.join("\n")
   end
 
+  # TODO: refactor to improve variable names
   def +(other_list)
     # Cloning ensures that changing one list will not change any other lists
     combined_items = items.map(&:clone)
     other_list.items.each do |other_item|
       match = false
-      combined_items.each do |item|
-        if item.product == other_item.product && item.unit == other_item.unit
-          item.quantity += other_item.quantity
+      combined_items.each_with_index do |item, i|
+        if item.product == other_item.product && item.unit == other_item.unit # TODO: replace with a "can add" method?
+          combined_items[i] = item + other_item
           match = true
         end
       end
@@ -121,7 +121,7 @@ lemony_iced_tea = Dish.new("lemony iced tea", "TBD", 1, shopping_list)
 
 # lemony_iced_tea.print_shopping_list(2)
 
-# TODO: Use more interesting lists
+# Tests for adding lists (could be more interesting)
 # l0 = ShoppingList.new([item_1, item_2])
 # l1 = ShoppingList.new([item_1, item_2])
 # l2 = l0 + l1
@@ -130,13 +130,14 @@ lemony_iced_tea = Dish.new("lemony iced tea", "TBD", 1, shopping_list)
 #   puts list
 # end
 
-lemon0 = Item.new(1, whole, lemon)
-lemon1 = Item.new(1, whole, lemon)
-lemon2 = lemon0 + lemon1
-[lemon0, lemon1, lemon2].each_with_index do |lemon, i|
-  puts "lemon#{i}"
-  puts lemon
-end
+# Tests for adding items
+# lemon0 = Item.new(1, whole, lemon)
+# lemon1 = Item.new(1, whole, lemon)
+# lemon2 = lemon0 + lemon1
+# [lemon0, lemon1, lemon2].each_with_index do |lemon, i|
+#   puts "lemon#{i}"
+#   puts lemon
+# end
 # tea1 = Item.new(8, fluid_ounce, iced_tea)
 # tea2 = Item.new(8, whole, iced_tea)
 # puts tea1 + tea2
