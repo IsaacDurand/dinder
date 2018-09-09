@@ -29,6 +29,7 @@ class Unit
 end
 
 class Item
+  # TODO: Subclass ArgumentError?
   PRODUCT_MISMATCH = "Cannot add two items belonging to different products"
   UNIT_MISMATCH = "Cannot add two items with quantities specified in different units"
 
@@ -44,11 +45,27 @@ class Item
     "#{product} (#{quantity} #{unit})"
   end
 
+  def can_add?(other_item)
+    begin
+      check_for_mismatch(other_item)
+      true
+    rescue ArgumentError
+      false
+    end
+  end
+
   def +(other_item)
     raise ArgumentError, PRODUCT_MISMATCH unless self.product == other_item.product
     raise ArgumentError, UNIT_MISMATCH unless self.unit == other_item.unit
     combined_quantity = quantity + other_item.quantity
     self.class.new(combined_quantity, unit, product)
+  end
+
+private
+
+  def check_for_mismatch(other_item)
+    raise ArgumentError, PRODUCT_MISMATCH unless self.product == other_item.product
+    raise ArgumentError, UNIT_MISMATCH unless self.unit == other_item.unit
   end
 end
 
@@ -70,13 +87,14 @@ class ShoppingList
     other_list.items.each do |other_item|
       match = false
       combined_items.each_with_index do |item, i|
-        if item.product == other_item.product && item.unit == other_item.unit # TODO: replace with a "can add" method?
+        if item.can_add?(other_item)
           combined_items[i] = item + other_item
           match = true
         end
       end
       combined_items << other_item.clone unless match
     end
+    # TODO: sort combined_items so that items with the same product but different units will appear next to each other?
     self.class.new(combined_items)
   end
 end
@@ -142,3 +160,12 @@ lemony_iced_tea = Dish.new("lemony iced tea", "TBD", 1, shopping_list)
 # tea2 = Item.new(8, whole, iced_tea)
 # puts tea1 + tea2
 # puts lemon1 + tea1
+
+# Tests for item helper methods
+# lemon0 = Item.new(1, whole, lemon)
+# lemon1 = Item.new(1, whole, lemon)
+# lemon2 = Item.new(1, fluid_ounce, lemon)
+# tea = Item.new(8, fluid_ounce, iced_tea)
+# puts lemon0.can_add?(lemon1)
+# puts lemon0.can_add?(lemon2)
+# puts lemon2.can_add?(tea)
