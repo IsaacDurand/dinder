@@ -29,6 +29,9 @@ class Unit
 end
 
 class Item
+  PRODUCT_MISMATCH = "Cannot add two items belonging to different products"
+  UNIT_MISMATCH = "Cannot add two items with quantities specified in different units"
+
   attr_accessor :quantity
   attr_reader :unit, :product
 
@@ -42,7 +45,12 @@ class Item
     "#{product} (#{quantity} #{unit})"
   end
 
-  # TODO: Add clone method (What does the existing clone method do?)
+  def +(other_item)
+    raise ArgumentError, PRODUCT_MISMATCH unless self.product == other_item.product
+    raise ArgumentError, UNIT_MISMATCH unless self.unit == other_item.unit
+    combined_quantity = quantity + other_item.quantity
+    self.class.new(combined_quantity, unit, product)
+  end
 end
 
 class ShoppingList
@@ -114,10 +122,22 @@ lemony_iced_tea = Dish.new("lemony iced tea", "TBD", 1, shopping_list)
 # lemony_iced_tea.print_shopping_list(2)
 
 # TODO: Use more interesting lists
-l0 = ShoppingList.new([item_1, item_2])
-l1 = ShoppingList.new([item_1, item_2])
-l2 = l0 + l1
-[l0, l1, l2].each_with_index do |list, i|
-  puts "l#{i}"
-  puts list
+# l0 = ShoppingList.new([item_1, item_2])
+# l1 = ShoppingList.new([item_1, item_2])
+# l2 = l0 + l1
+# [l0, l1, l2].each_with_index do |list, i|
+#   puts "l#{i}"
+#   puts list
+# end
+
+lemon0 = Item.new(1, whole, lemon)
+lemon1 = Item.new(1, whole, lemon)
+lemon2 = lemon0 + lemon1
+[lemon0, lemon1, lemon2].each_with_index do |lemon, i|
+  puts "lemon#{i}"
+  puts lemon
 end
+# tea1 = Item.new(8, fluid_ounce, iced_tea)
+# tea2 = Item.new(8, whole, iced_tea)
+# puts tea1 + tea2
+# puts lemon1 + tea1
