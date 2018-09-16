@@ -4,6 +4,8 @@
 # To run the file:
 # ruby <path>
 
+# TODO: Add tests
+
 class Product
   attr_reader :name
 
@@ -55,8 +57,7 @@ class Item
   end
 
   def +(other_item)
-    raise ArgumentError, PRODUCT_MISMATCH unless self.product == other_item.product
-    raise ArgumentError, UNIT_MISMATCH unless self.unit == other_item.unit
+    check_for_mismatch(other_item)
     combined_quantity = quantity + other_item.quantity
     self.class.new(combined_quantity, unit, product)
   end
