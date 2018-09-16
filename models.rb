@@ -1,3 +1,6 @@
+# TODO: Deprecate this file.
+# I used it as a playground to test out model ideas before creating the Ruby app.
+
 # To play with these classes:
 # irb -r ./models.rb
 
