@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  quantity: 9.99
-  unit: one
-  product: one
-  dish: one
+# one:
+#   quantity: 9.99
+#   unit: one
+#   product: one
+#   dish: one
 
-two:
-  quantity: 9.99
-  unit: two
-  product: two
-  dish: two
+# two:
+#   quantity: 9.99
+#   unit: two
+#   product: two
+#   dish: two
