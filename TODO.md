@@ -1,3 +1,8 @@
+* Product resource
+   * Add index view
+   * Indicate to user whether product was successfully created
+   * Add testing?
+   * Remove unused routes and files
 * Add association methods to models (what do I need at this point?)
 * Consider adding stricter validation for models (such as permitting only lowercase characters in name fields)
 * Add ShoppingList model
