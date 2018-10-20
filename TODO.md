@@ -1,8 +1,12 @@
 * Product resource
-   * Add index view
-   * Indicate to user whether product was successfully created
    * Add testing?
    * Remove unused routes and files
+* Unit resource
+   * Add index view with form to create new unit
+   * Add testing?
+   * Remove unused routes and files
+* Look into plurals (inflection?)
+* Add page to create a new dish
 * Add association methods to models (what do I need at this point?)
 * Consider adding stricter validation for models (such as permitting only lowercase characters in name fields)
 * Add ShoppingList model

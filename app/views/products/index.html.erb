@@ -14,5 +14,15 @@
       <%= form.text_field :name, required: true %>
       <%= form.button %>
     <% end %>
+    <% if flash[:notice] %>
+      <p>
+        <%= flash[:notice] %>
+      </p>
+    <% end %>
+    <% if flash[:warning] %>
+      <p>
+        <%= flash[:warning] %>
+      </p>
+    <% end %>
   </div>
 </div>

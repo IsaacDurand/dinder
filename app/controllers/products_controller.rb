@@ -10,10 +10,11 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to products_url
+      flash[:notice] = "New product (#{@product.name}) successfully created"
     else
-      head :bad_request # Is this the best error code to use?
+      flash[:warning] = "Could not create new product called #{@product.name}. #{@product.errors.full_messages.join('. ')}."
     end
+    redirect_to products_url
   end
 
 private
