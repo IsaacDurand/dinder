@@ -4,6 +4,10 @@
 * Unit resource
    * Add testing?
    * Remove unused files
+* Dish resource
+   * Add index view with form to create new recipes (no items yet)
+   * Require recipe or recipe_url?
+* DRY up partials and controllers
 * Look into plurals (inflection?)
 * Add page to create a new dish
 * Add association methods to models (what do I need at this point?)
