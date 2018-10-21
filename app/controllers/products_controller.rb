@@ -4,9 +4,6 @@ class ProductsController < ApplicationController
     @products = Product.a_to_z
   end
 
-  def new
-  end
-
   def create
     @product = Product.new(product_params)
     if @product.save
