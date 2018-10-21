@@ -1,0 +1,28 @@
+<div class="flex-container">
+  <div class="margin-right">
+    <h1>Units</h1>
+    <ol>
+      <% @units.each do |unit| %>
+        <li><%= unit.name %></li>
+      <% end %>
+    </ol>
+  </div>
+  <div>
+    <h1>Add a new unit</h1>
+    <%= form_with model: Unit.new do |form| %>
+      <%= form.label :name %>
+      <%= form.text_field :name, required: true %>
+      <%= form.button %>
+    <% end %>
+    <% if flash[:notice] %>
+      <p>
+        <%= flash[:notice] %>
+      </p>
+    <% end %>
+    <% if flash[:warning] %>
+      <p>
+        <%= flash[:warning] %>
+      </p>
+    <% end %>
+  </div>
+</div>
