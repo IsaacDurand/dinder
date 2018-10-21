@@ -1,6 +1,6 @@
 * Product resource
    * Add testing?
-   * Remove unused routes and files
+   * Remove unused files
 * Unit resource
    * Add index view with form to create new unit
    * Add testing?
