@@ -5,7 +5,10 @@
    * Add testing?
    * Remove unused files
 * Dish resource
-   * Add index view with form to create new recipes (no items yet)
+   * Determine how to prepopulate new form when creation request fails without reloading the page (local: true - would this require JS?) or changing the URL
+      * Is the page reloading right now?
+   * Add links from index to show
+   * Add update view where items can be added to recipes
    * Require recipe or recipe_url?
 * DRY up partials and controllers
 * Look into plurals (inflection?)

@@ -1,0 +1,7 @@
+<%= link_to "Home", root_path %>
+<h1>Dishes</h1>
+<ol>
+  <% @dishes.each do |dish| %>
+    <li><%= dish.name %></li>
+  <% end %>
+</ol>

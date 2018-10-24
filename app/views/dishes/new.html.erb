@@ -1,0 +1,30 @@
+<%= link_to "Home", root_path %>
+<h1>Add a new dish</h1>
+<%= form_with model: @dish, local: true do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name, required: true %>
+  </div>
+  <div>
+    <%= form.label :base_servings, "Serves" %>
+    <!-- TODO: add min: 1 to prevent errors -->
+    <%= form.number_field :base_servings, required: true %>
+  </div>
+  <div>
+    <%= form.label :recipe_url, "Recipe link" %>
+    <%= form.url_field :recipe_url %>
+  </div>
+  <div>
+    <%= form.label :recipe %>
+    <%= form.text_area :recipe %>
+  </div>
+  <%= form.button %>
+<% end %>
+<% if @dish.errors.any? %>
+  <p>Could not create dish</p>
+  <ul>
+    <% @dish.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
