@@ -1,5 +1,6 @@
 <%= link_to "Home", root_path %>
 <h1>Dishes</h1>
+<%= link_to "Create a new dish", new_dish_path %>
 <ol>
   <% @dishes.each do |dish| %>
     <li><%= dish.name %></li>
