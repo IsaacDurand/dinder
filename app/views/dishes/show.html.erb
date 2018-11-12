@@ -1,0 +1,16 @@
+<%= link_to "Home", root_path %>
+
+<h1><%= @dish.name %></h1>
+<p>Serves <%= @dish.base_servings %></p>
+
+<h2>
+  <% if @dish.recipe_url.present? %>
+    <%= link_to "Recipe", @dish.recipe_url %>
+  <% else %>
+    Recipe
+  <% end %>
+</h2>
+
+<% if @dish.recipe.present? %>
+  <p><%= @dish.recipe %></p>
+<% end %>

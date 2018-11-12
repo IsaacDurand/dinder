@@ -3,6 +3,8 @@
 <%= link_to "Create a new dish", new_dish_path %>
 <ol>
   <% @dishes.each do |dish| %>
-    <li><%= dish.name %></li>
+    <li>
+      <%= link_to dish.name, dish_path(dish) %>
+    </li>
   <% end %>
 </ol>
