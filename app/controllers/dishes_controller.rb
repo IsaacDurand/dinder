@@ -14,9 +14,10 @@ class DishesController < ApplicationController
   def create
     @dish = Dish.new(dish_params)
     if @dish.save
-      redirect_to dishes_url
+      flash[:notice] = "New dish (#{@dish.name}) successfully created"
+      redirect_to dish_url(@dish)
     else
-      render :new
+      render js: "alert('Could not create new dish called #{@dish.name}. #{@dish.errors.full_messages.join('. ')}.')", status: :bad_request
     end
   end
 

@@ -1,5 +1,11 @@
 <%= link_to "Home", root_path %>
 
+<% if flash[:notice] %>
+  <p>
+    <%= flash[:notice] %>
+  </p>
+<% end %>
+
 <h1><%= @dish.name %></h1>
 <p>Serves <%= @dish.base_servings %></p>
 

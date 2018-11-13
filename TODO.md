@@ -5,8 +5,6 @@
    * Add testing?
    * Remove unused files
 * Dish resource
-   * Determine how to prepopulate new form when creation request fails without reloading the page (local: true - would this require JS?) or changing the URL
-      * Is the page reloading right now?
    * Add update view where items can be added to recipes
    * Require recipe or recipe_url?
 * DRY up partials and controllers
