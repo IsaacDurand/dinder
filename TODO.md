@@ -5,9 +5,15 @@
    * Add testing?
    * Remove unused files
 * Dish resource
-   * Add update view where items can be added to recipes
+   * Add edit view where items can be added to recipes
+      * Indicate to user whether item was successfully created (not just through HTTP status code)
+      * Improve UI (or wait until I adopt a front-end framework)
+      * Allow fractional quantities (not just decimals)
+   * Show list of items on show and edit views
    * Require recipe or recipe_url?
 * DRY up partials and controllers
+* Figure out what to do when I want to create items without dishes
+   * Should I change the ItemsController? Rename it (perhaps to DishItemsController) and create a new controller? Review https://guides.rubyonrails.org/routing.html#nested-resources
 * Look into plurals (inflection?)
 * Add page to create a new dish
 * Add association methods to models (what do I need at this point?)

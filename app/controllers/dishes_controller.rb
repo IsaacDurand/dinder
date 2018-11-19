@@ -11,6 +11,10 @@ class DishesController < ApplicationController
     @dish = Dish.new
   end
 
+  def edit
+    @dish = Dish.find(params[:id])
+  end
+
   def create
     @dish = Dish.new(dish_params)
     if @dish.save
