@@ -3,9 +3,10 @@ class ItemsController < ApplicationController
     @dish = Dish.find(params[:dish_id])
     @item = @dish.items.build(item_params)
     if @item.save
-      head :created
+      flash[:notice] = "New item (#{@item.to_s}) added to dish"
+      redirect_back fallback_location: dish_url(@dish)
     else
-      head :bad_request
+      render js: "alert('Could not create new item. #{@item.errors.full_messages.join('. ')}.')", status: :bad_request
     end
   end
 

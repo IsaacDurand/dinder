@@ -7,7 +7,6 @@
    * Remove unused files
 * Dish resource
    * Add edit view where items can be added to recipes
-      * Indicate to user whether item was successfully created (not just through HTTP status code)
       * Improve UI (or wait until I adopt a front-end framework)
       * Allow fractional quantities (not just decimals)
    * Require recipe or recipe_url?
