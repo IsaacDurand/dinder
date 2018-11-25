@@ -23,6 +23,18 @@
   <p><%= @dish.recipe %></p>
 <% end %>
 
+<h2>
+  Ingredients
+</h2>
+<ol>
+  <% @dish.items.each do |item| %>
+    <li>
+      <%= item.to_s %>
+    </li>
+  <% end %>
+</ol>
+
+<h3>Add a new ingredient</h3>
 <%= form_with(model: [@dish, @dish.items.build]) do |form| %>
   <div>
     <%= form.label :quantity %>
